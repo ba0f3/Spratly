@@ -6,21 +6,21 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Hash;
 
-class CreateDemoDataCommand extends Command {
+class InitCommand extends Command {
 
 	/**
 	 * The console command name.
 	 *
 	 * @var string
 	 */
-	protected $name = 'spratly:demo';
+	protected $name = 'spratly:init';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Insert demo data for Spratly.';
+	protected $description = 'Insert default data for Spratly.';
 
 	/**
 	 * Create a new command instance.
@@ -41,9 +41,39 @@ class CreateDemoDataCommand extends Command {
 	{
         // Clear User table
         \User::truncate();
+        Navigation::truncate();
 
+        $this->createDefaultUsers();
+        $this->createDefaultNavigation();
+
+
+	}
+
+    public function createDefaultNavigation() {
+        $top = new Navigation();
+        $top->name = 'top';
+        $top->path = '';
+        $top->enabled = true;
+        $top->save();
+
+        $left = new Navigation();
+        $left->name = 'left';
+        $left->path = '';
+        $left->enabled = true;
+        $left->save();
+
+        $dashboard = new Navigation();
+        $dashboard->parent_id = $top->id;
+        $dashboard->name = 'Dashboard';
+        $dashboard->path = 'dashboard';
+        $dashboard->icon = 'dashboard';
+        $dashboard->enabled = true;
+        $dashboard->save();
+    }
+
+    public function createDefaultUsers() {
         // Make default administrator
-		$admin = new \User;
+        $admin = new \User;
         $admin->username = 'admin';
         $admin->email = 'admin@example.com';
         $admin->password = Hash::make('123456');
@@ -51,7 +81,7 @@ class CreateDemoDataCommand extends Command {
         $admin->last_name = 'Administrator';
         $admin->enabled = true;
         $admin->save();
-	}
+    }
 
 	/**
 	 * Get the console command arguments.
@@ -60,8 +90,7 @@ class CreateDemoDataCommand extends Command {
 	 */
 	protected function getArguments()
 	{
-		return array(
-		);
+		return array();
 	}
 
 	/**
@@ -71,8 +100,7 @@ class CreateDemoDataCommand extends Command {
 	 */
 	protected function getOptions()
 	{
-		return array(
-		);
+		return array();
 	}
 
 }

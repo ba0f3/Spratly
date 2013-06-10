@@ -13,6 +13,7 @@ class SpratlySetupUsersTable extends Migration {
         // Creates the users table
         Schema::create('users', function($table)
         {
+            /** @var $table \Illuminate\Database\Schema\Blueprint */
             $table->increments('id');
             $table->string('username');
             $table->string('email');

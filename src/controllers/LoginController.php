@@ -7,6 +7,7 @@
 
 namespace Rgv151\Spratly;
 
+use Carbon\Carbon;
 use Input;
 use Controller;
 use View;
@@ -19,10 +20,15 @@ class LoginController extends Controller {
     }
 
     public function doLogin() {
+        if(Input::get('_token') !== csrf_token()) {
+            return Redirect::to('admin/login');
+        }
         $email = Input::get('email');
         $password = Input::get('password');
 
         if (Auth::attempt(array('email' => $email, 'password' => $password))) {
+            Auth::user()->last_login = Carbon::now();
+            Auth::user()->save();
             return Redirect::intended('admin');
         } else {
             return Redirect::intended('admin/login');

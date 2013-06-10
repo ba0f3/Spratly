@@ -125,7 +125,7 @@
             <ul class="unstyled user-info">
                 <li><a href="{{URL::to('/admin/user/'.$user->id)}}">{{$user->username}}</a></li>
                 <li>Last Access : <br/>
-                    <small><i class="icon-calendar"></i> 16 Mar 16:32</small>
+                    <small><i class="icon-calendar"></i> {{$user->last_login}}</small>
                 </li>
             </ul>
         </div>

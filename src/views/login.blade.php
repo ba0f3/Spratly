@@ -36,6 +36,7 @@
                                 </div>
                             </div>
                             <button class="btn btn-inverse btn-block" type="submit">Sign in</button>
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                         </form>
                     </div>
                     <div id="forgot" class="tab-pane">

@@ -34,13 +34,13 @@ class SpratlyServiceProvider extends ServiceProvider {
 	public function register()
 	{
         //$this->registerDependency();
-        //new CreateDemoDataCommand();
 
-        $this->app['command.spratly.demo'] = $this->app->share(function($app)
+
+        $this->app['command.spratly.init'] = $this->app->share(function($app)
         {
-            return new CreateDemoDataCommand;
+            return new InitCommand;
         });
-        $this->commands('command.spratly.demo');
+        $this->commands('command.spratly.init');
 	}
 
     /**
@@ -73,7 +73,7 @@ class SpratlyServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('command.spratly.demo');
+		return array('command.spratly.init');
 	}
 
 }
