@@ -1,0 +1,37 @@
+{
+    "name": "rgv151/spratly",
+    "description": "Content Administration System",
+    "keywords": ["administrator", "laravel-administrator", "laravel", "content", "cms"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bruce Doan",
+            "email": "rgv151@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x"
+    },
+    "autoload": {
+        "classmap": [
+            "src/commands",
+            "src/controllers",
+            "src/migrations",
+            "src/models"
+
+        ],
+        "psr-0": {
+            "Rgv151\\Spratly": "src/"
+        }
+    },
+    "scripts": {
+        "pre-update-cmd": [
+        ],
+        "post-install-cmd": [
+        ],
+        "post-update-cmd": [
+        ]
+    },
+    "minimum-stability": "dev"
+}
