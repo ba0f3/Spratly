@@ -7,7 +7,7 @@
 namespace Rgv151\Spratly;
 use Eloquent;
 /**
- * Generated properties for Rgv151\Spratly\Navigation
+ * Generated properties for Rgv151\Spratly\Menu
  *
  * @property integer $id
  * @property integer $parent_id
@@ -18,12 +18,15 @@ use Eloquent;
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
  * @property string $icon
+ * @property string $alias
  */
-class Navigation extends Eloquent {
+class Menu extends Eloquent {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'navigation';
+    protected $table = 'spratly_menus';
+
+    protected $guarded = array('id');
 }
