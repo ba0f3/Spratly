@@ -185,6 +185,15 @@
         endif;
         endforeach;
         ?>
+        <li class="accordion-group">
+            <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#configuration-nav">
+                <i class="icon-cogs icon-large"></i> Configuration <span class="label label-inverse pull-right">2</span>
+            </a>
+            <ul class="collapse" id="configuration-nav">
+                <li><a href='{{URL::to('manage/forms')}}'><i class="icon-angle-right"></i> Forms</a></li>
+                <li><a href='{{URL::to('manage/a')}}'><i class="icon-angle-right"></i> Posts</a></li>
+            </ul>
+        </li>
     </ul>
     <!-- END MAIN NAVIGATION -->
 

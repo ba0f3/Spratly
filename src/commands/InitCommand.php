@@ -43,9 +43,13 @@ class InitCommand extends Command {
         \User::truncate();
         Menu::truncate();
 
+        //Form::truncate();
+        //FormField::truncate();
+
         $this->createDefaultUsers();
         $this->createDefaultNavigation();
 
+        $this->createDefaultForms();
 
 	}
 
@@ -83,6 +87,10 @@ class InitCommand extends Command {
         $admin->last_name = 'Administrator';
         $admin->enabled = true;
         $admin->save();
+    }
+
+    public function createDefaultForms() {
+
     }
 
 	/**

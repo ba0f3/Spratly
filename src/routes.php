@@ -20,4 +20,6 @@ Route::group(array('prefix' => Config::get('spratly::spratly.prefix')), function
     Route::get('/login', 'Rgv151\Spratly\LoginController@getLogin');
     Route::post('/login', 'Rgv151\Spratly\LoginController@doLogin');
     Route::any('/logout', 'Rgv151\Spratly\LoginController@doLogout');
+
+    Route::resource('manage/forms', 'Rgv151\Spratly\FormController', array('except' => array('update', 'destroy')));
 });
