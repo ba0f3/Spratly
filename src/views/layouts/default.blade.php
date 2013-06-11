@@ -86,7 +86,7 @@
                     <ul class="nav">
                         <?php
                         $top_nav = Menu::where('alias', '=', 'top')->first();
-                        $top_menus = Menu::where('parent_id', '=', $top_nav['id'])->where('enabled', '=', 1)->get();
+                        $top_menus = Menu::where('parent_id', '=', $top_nav['id'])->where('enabled', '=', 1)->orderBy('order')->get();
                         $curent_path = Route::getCurrentRoute()->getPath();
                         foreach($top_menus as $menu):
                             $path = URL::to(Config::get('spratly::spratly.prefix') . '/'. $menu->path);
@@ -153,7 +153,7 @@
     <ul id="menu" class="unstyled accordion collapse in">
         <?php
         $left_nav = Menu::where('alias', '=', 'left')->first();
-        $left_menus = Menu::where('parent_id', '=', $left_nav['id'])->where('enabled', '=', 1)->get();
+        $left_menus = Menu::where('parent_id', '=', $left_nav['id'])->where('enabled', '=', 1)->orderBy('order')->get();
         $curent_path = Route::getCurrentRoute()->getPath();
         foreach($left_menus as $menu):
             $path = URL::to(Config::get('spratly::spratly.prefix') . '/'. $menu->path);

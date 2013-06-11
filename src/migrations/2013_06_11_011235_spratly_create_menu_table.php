@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class SpratlyCreateNavigationTable extends Migration {
+class SpratlyCreateMenuTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -19,7 +19,8 @@ class SpratlyCreateNavigationTable extends Migration {
             $table->string('alias')->unique();
             $table->string('icon');
             $table->string('path');
-            $table->boolean('enabled');
+            $table->integer('order')->default(1);
+            $table->boolean('enabled')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,7 +33,7 @@ class SpratlyCreateNavigationTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('navigation');
+        Schema::drop('spratly_menus');
 	}
 
 }

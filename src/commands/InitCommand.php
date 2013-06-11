@@ -50,26 +50,26 @@ class InitCommand extends Command {
 	}
 
     public function createDefaultNavigation() {
-        $top = Menu::create(array('name' => 'top', 'alias' => 'top', 'path' => '', 'enabled' => true));
+        $top = Menu::create(array('name' => 'top', 'alias' => 'top', 'path' => ''));
         $top->save();
 
-        $left = Menu::create(array('name' => 'left', 'alias' => 'left', 'path' => '', 'enabled' => true));
+        $left = Menu::create(array('name' => 'left', 'alias' => 'left', 'path' => ''));
         $left->save();
 
-        Menu::create(array('parent_id' => $top->id, 'name' => 'Dashboard', 'alias' => 'dashboard-top', 'path' => '/', 'enabled' => true))->save();
+        Menu::create(array('parent_id' => $top->id, 'name' => 'Dashboard', 'alias' => 'dashboard-top', 'path' => '/', 'order' => -99999))->save();
 
-        $user = Menu::create(array('parent_id' => $top->id, 'name' => 'Users', 'alias' => 'users', 'path' => '', 'enabled' => true));
+        $user = Menu::create(array('parent_id' => $top->id, 'name' => 'Users', 'alias' => 'users', 'path' => ''));
         $user->save();
 
-        Menu::create(array('parent_id' => $user->id, 'name' => 'Manage Users', 'alias' => 'manage-users', 'path' => 'users', 'enabled' => true))->save();
-        Menu::create(array('parent_id' => $user->id, 'name' => 'Manage Permissions', 'alias' => 'manage-permissions', 'path' => 'permissions', 'enabled' => true))->save();
+        Menu::create(array('parent_id' => $user->id, 'name' => 'Manage Users', 'alias' => 'manage-users', 'path' => 'users'))->save();
+        Menu::create(array('parent_id' => $user->id, 'name' => 'Manage Permissions', 'alias' => 'manage-permissions', 'path' => 'permissions'))->save();
 
-        Menu::create(array('parent_id' => $left->id, 'name' => 'Dashboard', 'alias' => 'dashboard-left', 'path' => '/', 'icon' => 'dashboard', 'enabled' => true))->save();
-        $blog = Menu::create(array('parent_id' => $left->id, 'name' => 'Blog', 'alias' => 'blog', 'path' => '', 'icon' => 'book', 'enabled' => true));
+        Menu::create(array('parent_id' => $left->id, 'name' => 'Dashboard', 'alias' => 'dashboard-left', 'path' => '/', 'icon' => 'dashboard', 'order' => -99999))->save();
+        $blog = Menu::create(array('parent_id' => $left->id, 'name' => 'Blog', 'alias' => 'blog', 'path' => '', 'icon' => 'book'));
         $blog->save();
 
-        Menu::create(array('parent_id' => $blog->id, 'name' => 'Catagories', 'alias' => 'blog-categories', 'path' => 'blog/categories', 'enabled' => true))->save();
-        Menu::create(array('parent_id' => $blog->id, 'name' => 'Posts', 'alias' => 'blog-posts', 'path' => 'blog/posts', 'enabled' => true))->save();
+        Menu::create(array('parent_id' => $blog->id, 'name' => 'Catagories', 'alias' => 'blog-categories', 'path' => 'blog/categories'))->save();
+        Menu::create(array('parent_id' => $blog->id, 'name' => 'Posts', 'alias' => 'blog-posts', 'path' => 'blog/posts'))->save();
 
     }
 
