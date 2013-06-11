@@ -11,11 +11,12 @@ class SpratlyCreateNavigationTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('navigation', function($table){
+		Schema::create('spratly_menus', function($table){
             /** @var $table \Illuminate\Database\Schema\Blueprint */
             $table->increments('id');
             $table->integer('parent_id');
             $table->string('name');
+            $table->string('alias')->unique();
             $table->string('icon');
             $table->string('path');
             $table->boolean('enabled');

@@ -41,7 +41,7 @@ class InitCommand extends Command {
 	{
         // Clear User table
         \User::truncate();
-        Navigation::truncate();
+        Menu::truncate();
 
         $this->createDefaultUsers();
         $this->createDefaultNavigation();
@@ -50,25 +50,27 @@ class InitCommand extends Command {
 	}
 
     public function createDefaultNavigation() {
-        $top = new Navigation();
-        $top->name = 'top';
-        $top->path = '';
-        $top->enabled = true;
+        $top = Menu::create(array('name' => 'top', 'alias' => 'top', 'path' => '', 'enabled' => true));
         $top->save();
 
-        $left = new Navigation();
-        $left->name = 'left';
-        $left->path = '';
-        $left->enabled = true;
+        $left = Menu::create(array('name' => 'left', 'alias' => 'left', 'path' => '', 'enabled' => true));
         $left->save();
 
-        $dashboard = new Navigation();
-        $dashboard->parent_id = $top->id;
-        $dashboard->name = 'Dashboard';
-        $dashboard->path = 'dashboard';
-        $dashboard->icon = 'dashboard';
-        $dashboard->enabled = true;
-        $dashboard->save();
+        Menu::create(array('parent_id' => $top->id, 'name' => 'Dashboard', 'alias' => 'dashboard-top', 'path' => '/', 'enabled' => true))->save();
+
+        $user = Menu::create(array('parent_id' => $top->id, 'name' => 'Users', 'alias' => 'users', 'path' => '', 'enabled' => true));
+        $user->save();
+
+        Menu::create(array('parent_id' => $user->id, 'name' => 'Manage Users', 'alias' => 'manage-users', 'path' => 'users', 'enabled' => true))->save();
+        Menu::create(array('parent_id' => $user->id, 'name' => 'Manage Permissions', 'alias' => 'manage-permissions', 'path' => 'permissions', 'enabled' => true))->save();
+
+        Menu::create(array('parent_id' => $left->id, 'name' => 'Dashboard', 'alias' => 'dashboard-left', 'path' => '/', 'icon' => 'dashboard', 'enabled' => true))->save();
+        $blog = Menu::create(array('parent_id' => $left->id, 'name' => 'Blog', 'alias' => 'blog', 'path' => '', 'icon' => 'book', 'enabled' => true));
+        $blog->save();
+
+        Menu::create(array('parent_id' => $blog->id, 'name' => 'Catagories', 'alias' => 'blog-categories', 'path' => 'blog/categories', 'enabled' => true))->save();
+        Menu::create(array('parent_id' => $blog->id, 'name' => 'Posts', 'alias' => 'blog-posts', 'path' => 'blog/posts', 'enabled' => true))->save();
+
     }
 
     public function createDefaultUsers() {

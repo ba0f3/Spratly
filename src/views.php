@@ -5,11 +5,13 @@
  * Time: 1:59 AM
  */
 
+namespace Rgv151\Spratly;
 use Carbon\Carbon;
-
+use View;
+use Auth;
 View::composer('spratly::*', function($view) {
     $view->user = Auth::user();
-    $view->top_nav = new \Rgv151\Spratly\Navigation;
+    $view->menus = Menu::all();
 });
 
 
