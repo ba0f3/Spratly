@@ -1176,3 +1176,10 @@ body.fixed .pattern-switcher {
 }
 /*COMMENTS*/
 /* --------------- END Component Styles -------------------- */
+.pagination {
+    margin: 0;
+    text-align: right;
+}
+.alerts {
+    background-color: #F5F5F5;
+}

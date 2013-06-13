@@ -43,12 +43,15 @@ class InitCommand extends Command {
         \User::truncate();
         Menu::truncate();
 
+        Role::truncate();
+        Permission::truncate();
+
         //Form::truncate();
         //FormField::truncate();
 
         $this->createDefaultUsers();
         $this->createDefaultNavigation();
-
+        $this->createDefaultRoles();
         $this->createDefaultForms();
 
 	}
@@ -62,11 +65,13 @@ class InitCommand extends Command {
 
         Menu::create(array('parent_id' => $top->id, 'name' => 'Dashboard', 'alias' => 'dashboard-top', 'path' => '/', 'order' => -99999))->save();
 
-        $user = Menu::create(array('parent_id' => $top->id, 'name' => 'Users', 'alias' => 'users', 'path' => ''));
-        $user->save();
+        $settings = Menu::create(array('parent_id' => $top->id, 'name' => 'Settings', 'alias' => 'users', 'path' => '', 'order' => 1));
+        $settings->save();
 
-        Menu::create(array('parent_id' => $user->id, 'name' => 'Manage Users', 'alias' => 'manage-users', 'path' => 'users'))->save();
-        Menu::create(array('parent_id' => $user->id, 'name' => 'Manage Permissions', 'alias' => 'manage-permissions', 'path' => 'permissions'))->save();
+        Menu::create(array('parent_id' => $settings->id, 'name' => 'Manage Users', 'alias' => 'manage-users', 'path' => 'users'))->save();
+        Menu::create(array('parent_id' => $settings->id, 'name' => 'Manage Permissions', 'alias' => 'manage-permissions', 'path' => 'permissions'))->save();
+
+        Menu::create(array('parent_id' => $top->id, 'name' => 'Developer', 'alias' => 'developer', 'path' => '', 'order' => 2))->save();
 
         Menu::create(array('parent_id' => $left->id, 'name' => 'Dashboard', 'alias' => 'dashboard-left', 'path' => '/', 'icon' => 'dashboard', 'order' => -99999))->save();
         $blog = Menu::create(array('parent_id' => $left->id, 'name' => 'Blog', 'alias' => 'blog', 'path' => '', 'icon' => 'book'));
@@ -79,14 +84,24 @@ class InitCommand extends Command {
 
     public function createDefaultUsers() {
         // Make default administrator
-        $admin = new \User;
-        $admin->username = 'admin';
-        $admin->email = 'admin@example.com';
-        $admin->password = Hash::make('123456');
-        $admin->first_name = 'Super';
-        $admin->last_name = 'Administrator';
-        $admin->enabled = true;
-        $admin->save();
+        User::create(array('username' => 'admin', 'email' => 'admin@example.com', 'password' => Hash::make('123456'), 'first_name' => 'Super', 'last_name' => 'Admin', 'enabled' => true, 'role_id' => 1))->save();
+
+        User::create(array('username' => 'john', 'email' => 'john@example.com', 'password' => Hash::make('123456'), 'first_name' => 'John', 'last_name' => 'Doe', 'enabled' => true, 'role_id' => 4))->save();
+
+    }
+
+    public function createDefaultRoles() {
+        $administrator = Role::create(array('name' => 'Administrator', 'Has full control over every aspect of the site.'));
+        $administrator->save();
+
+        $developer = Role::create(array('name' => 'Developer', 'Developers typically are the only ones that can access the developer tools. Otherwise identical to Administrators, at least until the site is handed off.'));
+        $developer->save();
+
+        $powerUser = Role::create(array('name' => 'Power User', 'Can handle day-to-day management, but does not have full power.', 'removable' => true));
+        $powerUser->save();
+
+        $user = Role::create(array('name' => 'User', 'This is the default user with access to login.', 'default' => true, 'removable' => true));
+        $user->save();
     }
 
     public function createDefaultForms() {

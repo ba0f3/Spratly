@@ -467,10 +467,6 @@ function formGeneral() {
     });
     /*----------- END spinner CODE -------------------------*/
 
-    /*----------- BEGIN uniform CODE -------------------------*/
-    $('.uniform').uniform();
-    /*----------- END uniform CODE -------------------------*/
-
     /*----------- BEGIN validVal CODE -------------------------*/
     $('#validVal').validVal();
     /*----------- END validVal CODE -------------------------*/

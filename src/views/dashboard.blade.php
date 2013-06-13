@@ -272,3 +272,20 @@
 </div>
 <!-- /.outer -->
 @stop
+
+@section('bottom-script')
+<script src="{{asset('packages/rgv151/spratly/js/lib/jquery.tablesorter.min.js')}}"></script>
+<script src="{{asset('packages/rgv151/spratly/js/lib/jquery.mousewheel.js')}}"></script>
+<script src="{{asset('packages/rgv151/spratly/js/lib/jquery.sparkline.min.js')}}"></script>
+<script src="{{asset('packages/rgv151/spratly/js/lib/flot/jquery.flot.js')}}"></script>
+<script src="{{asset('packages/rgv151/spratly/js/lib/flot/jquery.flot.pie.js')}}"></script>
+<script src="{{asset('packages/rgv151/spratly/js/lib/flot/jquery.flot.selection.js')}}"></script>
+<script src="{{asset('packages/rgv151/spratly/js/lib/flot/jquery.flot.resize.js')}}"></script>
+<script src="{{asset('packages/rgv151/spratly/js/lib/fullcalendar.min.js')}}"></script>
+<script src="{{asset('packages/rgv151/spratly/js/main.js')}}"></script>
+<script type="text/javascript">
+    $(function() {
+        dashboard();
+    });
+</script>
+@stop

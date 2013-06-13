@@ -21,6 +21,7 @@ class SpratlyCreateMenuTable extends Migration {
             $table->string('path');
             $table->integer('order')->default(1);
             $table->boolean('enabled')->default(true);
+            $table->boolean('removable')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

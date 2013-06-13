@@ -22,6 +22,8 @@ class SpratlyServiceProvider extends ServiceProvider {
 	{
 		$this->package('rgv151/spratly');
 
+        include __DIR__.'/../../filters.php';
+        include __DIR__.'/../../models.php';
         include __DIR__.'/../../routes.php';
         include __DIR__.'/../../views.php';
 	}
@@ -41,6 +43,12 @@ class SpratlyServiceProvider extends ServiceProvider {
             return new InitCommand;
         });
         $this->commands('command.spratly.init');
+
+        $this->app['command.spratly.migrate'] = $this->app->share(function($app)
+        {
+            return new MigrateCommand;
+        });
+        $this->commands('command.spratly.migrate');
 	}
 
     /**
@@ -73,7 +81,7 @@ class SpratlyServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('command.spratly.init');
+		return array('command.spratly.init', 'command.spratly.migrate');
 	}
 
 }

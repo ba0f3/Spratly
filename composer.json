@@ -17,9 +17,10 @@
         "classmap": [
             "src/commands",
             "src/controllers",
+            "src/helpers",
             "src/migrations",
-            "src/models"
-
+            "src/models",
+            "src/observers"
         ],
         "psr-0": {
             "Rgv151\\Spratly": "src/"

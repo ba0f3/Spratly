@@ -45,8 +45,18 @@ class SpratlyCreateFormTable extends Migration {
 	 */
 	public function down()
 	{
+        Schema::table('spratly_form_fields', function($table) {
+            /** @var $table \Illuminate\Database\Schema\Blueprint */
+            $table->dropForeign('spratly_form_fields_form_id_foreign');
+        });
+
         Schema::dropIfExists('spratly_forms');
         Schema::dropIfExists('spratly_form_fields');
+
+        //Schema::table('spratly_form_fields', function($table) {
+        //    /** @var $table \Illuminate\Database\Schema\Blueprint */
+        //    $table->foreign('form_id')->references('id')->on('spratly_forms');
+        //});
 	}
 
 }

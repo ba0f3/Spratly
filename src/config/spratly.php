@@ -19,6 +19,10 @@ return array(
      *
      * @type string
      */
-    'title' => 'Spratly'
+    'title' => 'Spratly',
 
+    /**
+     * Number of records to display per page
+     */
+    'records_per_page' => 15
 );

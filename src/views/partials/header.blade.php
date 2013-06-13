@@ -25,7 +25,7 @@
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span12">
-                    <h3><i class="icon-home"></i> <?php if(!empty($title)): echo $title; endif ?></h3>
+                    <h3><i class="icon-<?php if(!empty($icon)): echo $icon; else: echo 'home'; endif ?>"></i> <?php if(!empty($title)): echo $title; endif ?></h3>
                 </div>
             </div>
             <!-- /.row-fluid -->

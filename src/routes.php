@@ -10,16 +10,13 @@
 
 Route::group(array('prefix' => Config::get('spratly::spratly.prefix')), function()
 {
-    Route::get('/', function() {
-        if(!Auth::check()) {
-            return Redirect::to('admin/login');
-        }
-        return View::make('spratly::dashboard');
-    });
+    Route::get('/', 'Rgv151\Spratly\AdminController@index');
 
     Route::get('/login', 'Rgv151\Spratly\LoginController@getLogin');
     Route::post('/login', 'Rgv151\Spratly\LoginController@doLogin');
     Route::any('/logout', 'Rgv151\Spratly\LoginController@doLogout');
 
+    Route::controller('users', 'Rgv151\Spratly\UserController');
     Route::resource('manage/forms', 'Rgv151\Spratly\FormController', array('except' => array('update', 'destroy')));
+
 });

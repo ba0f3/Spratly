@@ -138,11 +138,11 @@
         </a>
 
         <div class="media-body hidden-tablet">
-            <h5 class="media-heading">{{$user->first_name}} {{$user->last_name}} </h5>
+            <h5 class="media-heading"><a href="{{URL::to('/admin/user/'.$authUser->id)}}">{{$authUser->getDisplayName()}}</a></h5>
             <ul class="unstyled user-info">
-                <li><a href="{{URL::to('/admin/user/'.$user->id)}}">{{$user->username}}</a></li>
+                <li>Role: {{$authUser->role->name}}</li>
                 <li>Last Access : <br/>
-                    <small><i class="icon-calendar"></i> {{$user->last_login}}</small>
+                    <small><i class="icon-calendar"></i> {{$authUser->last_login}}</small>
                 </li>
             </ul>
         </div>
@@ -190,8 +190,8 @@
                 <i class="icon-cogs icon-large"></i> Configuration <span class="label label-inverse pull-right">2</span>
             </a>
             <ul class="collapse" id="configuration-nav">
-                <li><a href='{{URL::to('manage/forms')}}'><i class="icon-angle-right"></i> Forms</a></li>
-                <li><a href='{{URL::to('manage/a')}}'><i class="icon-angle-right"></i> Posts</a></li>
+                <li><a href='{{URL::to('admin/manage/forms')}}'><i class="icon-angle-right"></i> Forms</a></li>
+                <li><a href='{{URL::to('admin/manage/a')}}'><i class="icon-angle-right"></i> Posts</a></li>
             </ul>
         </li>
     </ul>
@@ -201,7 +201,29 @@
 <!-- END LEFT -->
 
 <!-- BEGIN MAIN CONTENT -->
+
 <div id="content">
+    @if(!empty($message) || !$errors->isEmpty())
+    <div class="row-fluid alerts">
+        <!--
+        @if(!$errors->isEmpty())
+        <div class="error alert-error">
+            <button type="button" class="close" data-dismiss="error">&times;</button>
+            @foreach($errors->all() as $error)
+            <div>{{$error}}</div>
+            @endforeach
+        </div>
+        @endif
+        //-->
+        @if(!empty($message))
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{$message}}
+        </div>
+
+        @endif
+    </div>
+    @endif
 @section('content')
 @show
 </div>
@@ -252,29 +274,7 @@
 
 <script src="{{asset('packages/rgv151/spratly/js/vendor/bootstrap.min.js')}}"></script>
 
-<script src="{{asset('packages/rgv151/spratly/js/lib/jquery.tablesorter.min.js')}}"></script>
-
-<script src="{{asset('packages/rgv151/spratly/js/lib/jquery.mousewheel.js')}}"></script>
-<script src="{{asset('packages/rgv151/spratly/js/lib/jquery.sparkline.min.js')}}"></script>
-<script src="{{asset('packages/rgv151/spratly/js/lib/flot/jquery.flot.js')}}"></script>
-<script src="{{asset('packages/rgv151/spratly/js/lib/flot/jquery.flot.pie.js')}}"></script>
-<script src="{{asset('packages/rgv151/spratly/js/lib/flot/jquery.flot.selection.js')}}"></script>
-<script src="{{asset('packages/rgv151/spratly/js/lib/flot/jquery.flot.resize.js')}}"></script>
-<script src="{{asset('packages/rgv151/spratly/js/lib/fullcalendar.min.js')}}"></script>
-
-
-
-
-
-<script src="{{asset('packages/rgv151/spratly/js/main.js')}}"></script>
-
-
-
-<script type="text/javascript">
-    $(function() {
-        dashboard();
-    });
-</script>
-
+@section('bottom-script')
+@show
 </body>
 </html>

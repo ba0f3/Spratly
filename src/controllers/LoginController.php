@@ -31,7 +31,7 @@ class LoginController extends Controller {
             Auth::user()->save();
             return Redirect::intended('admin');
         } else {
-            return Redirect::intended('admin/login');
+            return Redirect::to('admin/login');
         }
     }
 

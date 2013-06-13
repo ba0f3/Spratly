@@ -15,12 +15,13 @@ class SpratlySetupUsersTable extends Migration {
         {
             /** @var $table \Illuminate\Database\Schema\Blueprint */
             $table->increments('id');
-            $table->string('username');
-            $table->string('email');
+            $table->string('username')->unique();
+            $table->string('email')->unique();
             $table->string('password');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('confirmation_code');
+            $table->integer('role_id');
+
             $table->boolean('enabled')->default(false);
             $table->boolean('confirmed')->default(false);
             $table->dateTime('last_login');
